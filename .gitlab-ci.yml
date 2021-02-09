@@ -3,11 +3,11 @@
 pages:
   stage: deploy
   script:
-    - mkdir .public
-    - cp -r * .public
-    - mv .public public
+    - mkdir .presentation
+    - cp -r * .presentation
+    - mv .presentation presentation
   artifacts:
     paths:
-      - public
+      - presentation
   only:
     - master
