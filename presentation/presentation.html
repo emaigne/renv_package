@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Package renv</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Elise Maigné" />
+    <meta name="date" content="2021-02-09" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Package renv
+## Présentation et retour d’expérience<br/>– Figer ses versions de packages R–</br>
+<p style="font-size:12px">
+(et leurs dépendances et dépendances de dépendances)
+</p>
+### Elise Maigné
+### 2021-02-09
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# renv c'est quoi ? 
+&lt;img src="images/logo.jpeg", width="300" height="300"&gt;
+---
+### Package renv
+
+- Un package R créé par Kevin Ushey
+
+&gt; "new effort to bring project-local R dependency management to your projects". 
+
+--
+
+- renv ~ packrat 2.0 (aussi par Kevin Ushey)
+
+&gt; "The goal is for renv to be a robust, stable replacement for the Packrat package, with fewer surprises and better default behaviors."
+
+--
+
+- Figer et/ou partager les versions des packages de R utilisés **pour un projet**.
+
+
+--
+
+.center[![ok](images/index.png)]
+.center[![reprod](images/reproductibilite_transparent.png)]
+
+---
+
+# Initialisation
+
+Dans un dossier spécifique (la racine d'un projet) :
+
+
+```r
+install.packages("renv")
+library(renv)
+renv::init()
+```
+
+**OU**
+
+en mode projet Rstudio (.Rproj), sur un nouveau projet
+
+File &gt; New project &gt; New directory &gt; "Activate renv with this project". 
+
+(aussi dans les options du projet, onglet **Environments**)
+
+
+Et voilà !
+
+---
+
+# Fonctionnement
+
+`renv::init()` crée : 
+
+.pull-left[
+- ###un fichier **.Rprofile**
+- un fichier **renv.lock**
+- un dossier **renv** contenant :
+  - un fichier **.gitignore**
+  - un fichier **activate.R**
+  - un fichier **settings.dcf**
+  - un dossier **stagging**
+  - un dossier **library**
+]
+
+.pull-right[
+active renv au démarrage du projet/lancement de R depuis ce dossier
+]
+
+---
+
+# Fonctionnement
+
+`renv::init()` crée : 
+
+.pull-left[
+- un fichier **.Rprofile**
+- ###un fichier **renv.lock**
+- un dossier **renv** contenant :
+  - un fichier **.gitignore**
+  - un fichier **activate.R**
+  - un fichier **settings.dcf**
+  - un dossier **stagging**
+  - un dossier **library**
+]
+
+.pull-right[
+&lt;/br&gt;&lt;/br&gt;
+stocke la version de R utilisée et les versions des dépendances **dont on a besoin dans le code**
+]
+
+---
+
+# Fonctionnement
+
+`renv::init()` crée : 
+
+.pull-left[
+- un fichier **.Rprofile**
+- un fichier **renv.lock**
+- un dossier **renv** contenant :
+  - ###un fichier **.gitignore**
+  - un fichier **activate.R**
+  - un fichier **settings.dcf**
+  - un dossier **stagging**
+  - un dossier **library**
+]
+
+.pull-right[
+&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;
+Si on travaille aussi avec git, les gros fichiers ne seront pas commités (les packages)
+]
+
+---
+
+# Fonctionnement
+
+`renv::init()` crée : 
+
+.pull-left[
+- un fichier **.Rprofile**
+- un fichier **renv.lock**
+- un dossier **renv** contenant :
+  - un fichier **.gitignore**
+  - ###un fichier **activate.R**
+  - ###un fichier **settings.dcf**
+  - un dossier **stagging**
+  - un dossier **library**
+]
+
+.pull-right[
+&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;
+Gère où il va chercher les packages, les différents repos, ...
+
+&lt;/br&gt;
+Les paramètres du renv
+]
+
+
+---
+
+# Fonctionnement
+
+`renv::init()` crée : 
+
+.pull-left[
+- un fichier **.Rprofile**
+- un fichier **renv.lock**
+- un dossier **renv** contenant :
+  - un fichier **.gitignore**
+  - un fichier **activate.R**
+  - un fichier **settings.dcf**
+  - ###un dossier **stagging**
+  - ###un dossier **library**
+]
+
+.pull-right[
+&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;
+Pour l'installation des "staged packages"
+
+&lt;/br&gt;
+&lt;/br&gt;
+Pour l'installation des autres packages
+]
+
+
+---
+
+# Fonctionnement
+
+Ce qui nous concerne c'est la gestion des libraries. 
+
+Quand on est dans un projet géré avec renv, on peut voir que le `.libPaths()` change : 
+
+**Sans renv :**
+
+
+```r
+&gt; .libPaths()
+[1] "/home/emaigne/R/x86_64-pc-linux-gnu-library/4.0"
+[2] "/opt/R/4.0.3/lib/R/library"
+```
+
+**Avec renv :**
+
+
+```r
+&gt; .libPaths()
+[1] "/home/emaigne/Documents/FORMATIONS/renv_package/renv/library/R-4.0/x86_64-pc-linux-gnu"
+[2] "/tmp/RtmpHmJq4n/renv-system-library" 
+```
+
+
+---
+
+# Fonctionnement
+
+De ce qu'on voit les packages sont installés dans un sous dossier du dossier **library**.
+
+--
+
+Et bien non !!
+
+![emplacements](images/emplacement_packages.png)
+
+Ce sont des liens symboliques vers un dossier de cache qui contient les différentes versions des packages. 
+
+---
+
+# Fonctionnement
+
+.pull-left[
+### Sans renv :
+&lt;figure&gt;
+&lt;img src="images/shared-library.svg", width="300" height="150"&gt;
+&lt;p style='font-size: 10px;'&gt;&amp;copy; Kevin Ushley, &lt;a&gt;https://kevinushey-2020-rstudio-conf.netlify.app/slides.html&lt;/a&gt;&lt;/p&gt;
+
+Une seule version par package.
+]
+.pull-right[
+### Avec renv :
+&lt;img src="images/package-cache.svg", width="300" height="150"&gt;
+&lt;p style='font-size: 10px;'&gt;&amp;copy; Kevin Ushley, &lt;a&gt;https://kevinushey-2020-rstudio-conf.netlify.app/slides.html&lt;/a&gt;&lt;/p&gt;
+
+Le cache permet d'avoir plusieurs verisons du même package.
+
+Le cache peut être désactivé pour un projet &amp;#9658; Les packages iront dans le `library` spécifique. 
+]
+
+---
+
+# Commandes à connaitre
+
+.pull-left[
+- ####**`renv::init()`**
+- `renv::snapshot()`
+- `renv::status()`
+- `renv::dependencies()`
+- `renv::restore()`
+]
+
+.pull-right[
+
+Pour initialiser l'utilisation de renv dans le projet.
+]
+
+---
+
+# Commandes à connaitre
+
+.pull-left[
+- `renv::init()`
+- ####**`renv::snapshot()`**
+- `renv::status()`
+- `renv::dependencies()`
+- `renv::restore()`
+]
+
+.pull-right[
+&lt;/br&gt;&lt;/br&gt;
+Pour sauver l'état des packages utilisés dans le fichier renv.lock
+]
+
+Exemple : 
+
+
+```r
+&gt; renv::snapshot()
+The following package(s) will be updated in the lockfile:
+# CRAN ===============================
+- BH               [* -&gt; 1.75.0-0]
+- R6               [* -&gt; 2.5.0]
+- Rcpp             [* -&gt; 1.0.6]
+- base64enc        [* -&gt; 0.1-3]
+
+Do you want to proceed? [y/N]: 
+```
+
+
+---
+
+# Commandes à connaitre
+
+.pull-left[
+- `renv::init()`
+- `renv::snapshot()`
+- ####**`renv::status()`**
+- `renv::dependencies()`
+- `renv::restore()`
+]
+
+.pull-right[
+Pour savoir où on en est par rapport au fichier renv.lock. 
+
+Est-ce qu'il y a des packages non présents dans renv.lock ? 
+
+Des packages dans renv.lock non utilisés dans le code R ? 
+]
+
+Exemple : 
+
+Uniquement packages appelés dans les scripts R d'une des façons suivantes :
+
+```r
+renv::status()
+The following package(s) are installed but not recorded in the lockfile:
+  Rcpp             [1.0.6]
+  whisker          [0.4]
+  knitr            [1.31]
+  
+Use `renv::snapshot()` to add these packages to your lockfile.
+```
+
+---
+
+# Commandes à connaitre
+
+.pull-left[
+- `renv::init()`
+- `renv::snapshot()`
+- `renv::status()`
+- ####**`renv::dependencies()`**
+- `renv::restore()`
+]
+
+.pull-right[
+&lt;/br&gt;&lt;/br&gt;
+Quels sont les packages utilisés dans le code ? 
+
+Uniquement packages appelés dans les scripts R (.R ou .Rmd ou .Rnw ou DESCRIPTION) d'une des façons suivantes :
+
+```r
+library(package)
+require(package)
+requireNamespace("package")
+package::method()
+```
+]
+
+---
+
+# Commandes à connaitre
+
+.pull-left[
+- `renv::init()`
+- `renv::snapshot()`
+- `renv::status()`
+- `renv::dependencies()`
+- ####**`renv::restore()`**
+]
+
+.pull-right[
+&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;
+Pour revenir à l'état du renv.lock. i.e. désinstalle les packages en trop, réinstalle les packages manquants. 
+
+(ça ne désinstalle pas vraiment, ça supprime l'entrée dans `library`)
+]
+
+---
+
+# Commandes à connaitre
+
+.pull-left[
+- `renv::init()`
+- `renv::snapshot()`
+- `renv::status()`
+- `renv::dependencies()`
+- `renv::restore()`
+]
+
+.pull-right[
+
+]
+
+&lt;hr&gt;
+
+Pour une utilisation plus fine du package, voir :
+
+https://kevinushey-2020-rstudio-conf.netlify.app/slides.html
+
+---
+
+# Retour d'expérience - Changement de version de R
+
+renv ne gère pas la version de R (bien que ce soit dans renv.lock). 
+
+--
+
+Sur un projet à plusieurs certains étaient en R3, d'autres en R4. En cours de route on a essayé d'uniformiser
+.small[
+1. tout le monde installe la version 4
+2. utilisation de renv
+]
+
+--
+
+La majorité des problèmes rencontrés venaient du fait du partage de libraries par défaut de R, une fois passé à la version 4.
+
+les packages sont potentiellement déjà installés, mais compilés avec une mauvaise version de R &amp;#9658; renv ne savait pas les installer, installation manuelle de tous les packages et dépendences. 
+
+--
+
+.center[![ok](images/cry.png)]
+
+---
+
+# Retour d'expérience - Utilisation avec git
+
+**renv prend tout son sens !!** On peut partager les memes versions de packages avec ses collaborateurs. 
+
+--
+
+#### Partage à minima :
+
+- le fichier renv.lock
+
+Une autre personne peut, chez elle faire un `renv::init()` pour installer les packages correspondants. 
+
+--
+
+####  Pour partager en cours de développement (**comportement par défaut en faisant un commit**) :
+
+- le fichier renv.lock
+- le fichier .Rprofile
+- le dossier renv/ avec dedans:
+    - .gitignore
+    - settings.dcf
+    - activate.R
+
+En théorie renv s'active tout seul chez les autres membres du projet. 
+
+Ils peuvent alors utiliser `renv::restore()` pour récupérer les bonnes versions des packages.
+
+
+---
+
+# Tips and tricks
+
+- **renv** c'est bien, notamment pour partager/archiver ses codes.
+
+- initialement je pensais que c'était lourd à gérer mais j'ai découvert l'existence du cache.
+
+- au démarrage, R nous dit que renv est utilisé (ou pas) :
+
+
+```r
+Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
+en ligne ou 'help.start()' pour obtenir l'aide au format HTML.
+Tapez 'q()' pour quitter R.
+
+* Project '~/Documents/FORMATIONS/2021_renv_package' loaded. [renv 0.12.3]
+```
+
+- `renv::status()` est très pratique, en abuser. 
+
+---
+class: center, middle
+
+# des questions ?
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
