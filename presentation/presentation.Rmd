@@ -467,9 +467,9 @@ Ils peuvent alors utiliser `renv::restore()` pour récupérer les bonnes version
 
 - **renv** c'est bien, notamment pour partager/archiver ses codes.
 
-- initialement je pensais que c'était lourd à gérer mais j'ai découvert l'existence du cache.
+- initialement je pensais que c'était lourd (je pensais le réserver pour des projets à déployer) mais j'ai découvert l'existence du cache.
 
-- au démarrage, R nous dit que renv est utilisé (ou pas) :
+- au démarrage, R nous dit si renv est utilisé (ou pas) :
 
 ```{r, eval = FALSE}
 Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
@@ -480,6 +480,8 @@ Tapez 'q()' pour quitter R.
 ```
 
 - `renv::status()` est très pratique, en abuser. 
+
+- Si vous n'êtes pas passé à R>=4, y passer avant de se mettre à utiliser renv.
 
 ---
 class: center, middle

@@ -1,6 +1,6 @@
 {
     "id": "9B7E4CEF",
-    "path": "~/Documents/FORMATIONS/2021_renv_package/xaringan-themer.css",
+    "path": "~/Documents/FORMATIONS/2021_package_renv/presentation/xaringan-themer.css",
     "project_path": "xaringan-themer.css",
     "type": "css",
     "hash": "3376737707",
@@ -16,11 +16,11 @@
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1612886769,
+    "lastKnownWriteTime": 1612954355,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1612886769,
+    "last_content_update": 1612954355,
     "read_only": false,
     "read_only_alternatives": []
 }
