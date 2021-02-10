@@ -5,6 +5,7 @@ pages:
   script:
     - mkdir .public
     - cp -r * .public
+    - cp presentation/presentation.html .public/presentation.html
     - mv .public public
   artifacts:
     paths:
