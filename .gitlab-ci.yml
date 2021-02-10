@@ -4,8 +4,9 @@ pages:
   stage: deploy
   script:
     - mkdir .public
+    - mkdir .public/presentation
     - cp -r * .public
-    - cp presentation/presentation.html .public/presentation.html
+    - cp presentation/presentation.html .public/presentation/presentation.html
     - mv .public public
   artifacts:
     paths:
