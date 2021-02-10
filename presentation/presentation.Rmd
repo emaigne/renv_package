@@ -329,8 +329,6 @@ Des packages dans renv.lock non utilisés dans le code R ?
 ]
 
 Exemple : 
-
-Uniquement packages appelés dans les scripts R d'une des façons suivantes :
 ```{r, eval=FALSE}
 renv::status()
 The following package(s) are installed but not recorded in the lockfile:
