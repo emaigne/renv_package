@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Package renv</title>
+    <title>Package renv : présentation et retour d’expérience</title>
     <meta charset="utf-8" />
     <meta name="author" content="Elise Maigné" />
     <meta name="date" content="2021-02-10" />
@@ -12,11 +12,12 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Package renv
-## Présentation et retour d’expérience<br/>– Figer ses versions de packages R–</br>
-<p style="font-size:12px">
+# Package renv : présentation et retour d’expérience
+## Figer ses versions de packages R
+<p style="font-size:14px">
 (et leurs dépendances et dépendances de dépendances)
 </p>
+</br>
 ### Elise Maigné
 ### 2021-02-10
 
@@ -30,7 +31,7 @@ class: center, middle, inverse, title-slide
 class: center, middle
 
 # renv c'est quoi ? 
-&lt;img src="images/logo.jpeg", width="300" height="300"&gt;
+&lt;img src="https://rstudio.github.io/renv/reference/figures/logo.svg", width="300" height="300"&gt;
 ---
 ### Package renv
 
@@ -54,6 +55,11 @@ class: center, middle
 .center[![ok](images/index.png)]
 .center[![reprod](images/reproductibilite_transparent.png)]
 
+---
+class: center, middle
+
+# Comment ça marche ?
+&lt;img src="https://rstudio.github.io/renv/reference/figures/logo.svg", width="300" height="300"&gt;
 ---
 
 # Initialisation
@@ -218,7 +224,7 @@ Quand on est dans un projet géré avec renv, on peut voir que le `.libPaths()` 
 
 ```r
 &gt; .libPaths()
-[1] "/home/emaigne/Documents/FORMATIONS/renv_package/renv/library/R-4.0/x86_64-pc-linux-gnu"
+[1] "/home/emaigne/Documents/mon_dossier/renv/library/R-4.0/x86_64-pc-linux-gnu"
 [2] "/tmp/RtmpHmJq4n/renv-system-library" 
 ```
 
@@ -259,6 +265,11 @@ Le cache permet d'avoir plusieurs verisons du même package.
 Le cache peut être désactivé pour un projet &amp;#9658; Les packages iront dans le `library` spécifique. 
 ]
 
+---
+class: center, middle
+
+# Comment l'utiliser ?
+&lt;img src="https://rstudio.github.io/renv/reference/figures/logo.svg", width="300" height="300"&gt;
 ---
 
 # Commandes à connaitre
@@ -409,6 +420,12 @@ Pour une utilisation plus fine du package, voir :
 https://kevinushey-2020-rstudio-conf.netlify.app/slides.html
 
 ---
+class: center, middle
+
+# Retour d'expérience
+&lt;img src="https://rstudio.github.io/renv/reference/figures/logo.svg", width="300" height="300"&gt;
+
+---
 
 # Retour d'expérience - Changement de version de R
 
@@ -426,7 +443,7 @@ Sur un projet à plusieurs certains étaient en R3, d'autres en R4. En cours de 
 
 La majorité des problèmes rencontrés venaient du fait du partage de libraries par défaut de R, une fois passé à la version 4.
 
-les packages sont potentiellement déjà installés, mais compilés avec une mauvaise version de R &amp;#9658; renv ne savait pas les installer, installation manuelle de tous les packages et dépendences. 
+Les packages étaient potentiellement déjà installés, mais compilés avec une mauvaise version de R &amp;#9658; renv ne savait pas les installer, installation manuelle de tous les packages et dépendences. 
 
 --
 
@@ -482,7 +499,7 @@ Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
 en ligne ou 'help.start()' pour obtenir l'aide au format HTML.
 Tapez 'q()' pour quitter R.
 
-* Project '~/Documents/FORMATIONS/2021_renv_package' loaded. [renv 0.12.3]
+* Project '~/Documents/mon_dossier' loaded. [renv 0.12.3]
 ```
 
 Et si pas activé : `renv::activate()`
@@ -494,6 +511,10 @@ Et si pas activé : `renv::activate()`
 --
 
 - Si vous n'êtes pas passé à R&gt;=4, y passer (proprement) avant de se mettre à utiliser renv.
+
+--
+
+- renv marche même sans RStudio, et sans "projet" RStudio. C'est en particulier le .Rprofile et les fichiers de renv qui vont activer renv au niveau du dossier. (Mais personnellement je recommande l'utilisation des .Rproj)
 
 ---
 class: center, middle
