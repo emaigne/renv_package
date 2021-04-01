@@ -279,6 +279,7 @@ class: center, middle
 - `renv::status()`
 - `renv::dependencies()`
 - `renv::restore()`
+- `renv::install()`
 ]
 
 .pull-right[
@@ -296,6 +297,7 @@ Pour initialiser l'utilisation de renv dans le projet.
 - `renv::status()`
 - `renv::dependencies()`
 - `renv::restore()`
+- `renv::install()`
 ]
 
 .pull-right[
@@ -328,6 +330,7 @@ Do you want to proceed? [y/N]:
 - ####**`renv::status()`**
 - `renv::dependencies()`
 - `renv::restore()`
+- `renv::install()`
 ]
 
 .pull-right[
@@ -359,6 +362,7 @@ Use `renv::snapshot()` to add these packages to your lockfile.
 - `renv::status()`
 - ####**`renv::dependencies()`**
 - `renv::restore()`
+- `renv::install()`
 ]
 
 .pull-right[
@@ -384,6 +388,7 @@ package::method()
 - `renv::status()`
 - `renv::dependencies()`
 - ####**`renv::restore()`**
+- `renv::install()`
 ]
 
 .pull-right[
@@ -393,6 +398,35 @@ Pour revenir à l'état du renv.lock. i.e. désinstalle les packages en trop, r�
 (ça ne désinstalle pas vraiment, ça supprime l'entrée dans `library`)
 ]
 
+---
+
+# Commandes à connaitre
+
+.pull-left[
+- `renv::init()`
+- `renv::snapshot()`
+- `renv::status()`
+- `renv::dependencies()`
+- `renv::restore()`
+- ####**`renv::install()`**
+]
+
+.pull-right[
+</br></br></br></br></br>
+Pour installer un package en utilisant renv 
+(CRAN, version spécifique, github, commit spécifique, Bioconductor, ...).
+
+Installation de manière intelligente. 
+]
+
+Exemple : 
+```{r, eval=FALSE}
+
+renv::install("digest") # latest
+renv::install("digest@0.6.18") # specific version
+renv::install("eddelbuettel/digest") # github latest dev version
+renv::install("bioc::Biobase") # (note: requires the BiocManager package)
+```
 ---
 
 # Commandes à connaitre
