@@ -545,7 +545,7 @@ Tapez 'q()' pour quitter R.
 
 --
 
-- renv marche même sans RStudio, et sans "projet" RStudio. C'est  le .Rprofile et les fichiers de renv qui vont activer renv au niveau du dossier.
+- renv marche même sans RStudio, et sans "projet" RStudio. C'est le .Rprofile et les fichiers de renv qui vont activer renv au niveau du dossier.
 
 ---
 class: center, middle

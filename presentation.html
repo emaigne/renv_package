@@ -512,7 +512,7 @@ Une autre personne peut, chez elle faire un `renv::init()` pour installer les pa
     - settings.dcf
     - activate.R
 
-En théorie renv s'active tout seul chez les autres membres du projet. 
+A l'aide du .Rprofile, renv s'active tout seul chez les autres membres du projet. 
 
 Ils peuvent alors utiliser `renv::restore()` pour récupérer les bonnes versions des packages.
 
@@ -525,7 +525,7 @@ Ils peuvent alors utiliser `renv::restore()` pour récupérer les bonnes version
 
 --
 
-- initialement je pensais que c'était lourd (je pensais le réserver pour des projets à déployer) et puis j'ai découvert l'existence du cache.
+- initialement je pensais que c'était lourd (je pensais le réserver pour des projets type container) et puis j'ai découvert l'existence du cache.
 
 --
 
@@ -540,8 +540,6 @@ Tapez 'q()' pour quitter R.
 * Project '~/Documents/mon_dossier' loaded. [renv 0.12.3]
 ```
 
-Et si pas activé : `renv::activate()`
-
 --
 
 - `renv::status()` est très pratique, je vous conseille d'en abuser. 
@@ -552,7 +550,7 @@ Et si pas activé : `renv::activate()`
 
 --
 
-- renv marche même sans RStudio, et sans "projet" RStudio. C'est en particulier le .Rprofile et les fichiers de renv qui vont activer renv au niveau du dossier. (Mais personnellement je recommande l'utilisation des .Rproj)
+- renv marche même sans RStudio, et sans "projet" RStudio. C'est le .Rprofile et les fichiers de renv qui vont activer renv au niveau du dossier.
 
 ---
 class: center, middle
