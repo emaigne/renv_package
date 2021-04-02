@@ -14,9 +14,9 @@ before_script:
 pages:
   stage: deploy
   script:
-    - bundle exec jekyll build -d public
+    - bundle exec jekyll build -d presentation
   artifacts:
     paths:
-      - public
+      - presentation
   only:
     - master
