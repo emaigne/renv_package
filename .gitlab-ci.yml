@@ -1,15 +1,13 @@
-html:
-  artifacts:
-    paths:
-    - presentation
-
 pages:
-  stage: deploy
-  image: 
-    name: "node:9-stretch"
-  artifacts:
+ script:
+ — mkdir .public
+ — cp -r presentation/* .public
+ — mv .public public
+ artifacts:
     paths:
-    - presentation
+    — public
+ only:
+ — master
 
 
 # # This file is a template, and might need editing before it works on your project.
