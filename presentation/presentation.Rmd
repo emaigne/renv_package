@@ -499,7 +499,7 @@ Une autre personne peut, chez elle faire un `renv::init()` pour installer les pa
 
 --
 
-####  Pour partager en cours de développement (**comportement par défaut en faisant un commit**) :
+####  Pour partager en cours de développement (**comportement par défaut**) :
 
 - le fichier renv.lock
 - le fichier .Rprofile
@@ -564,5 +564,21 @@ Tableau emprunté ici : https://6chaoran.wordpress.com/2020/07/20/introduction-o
 | save the environment | renv::snapshot() | conda env export > environment.yml | pip freeze > requirements.txt |
 | load the environment | renv::restore() | conda env create -f environment.yml | pip install -r requirements.txt |
 
+# Utilisation avec conda
+
+Voir ici : http://russ-hyde.rbind.io/post/2021-02-23-renv-in-conda/
+
+On peut installer r-base et r-renv avec conda puis c'est renv qui s'occupe de 
+gérer l'environnement R, et non plus conda, ce qui évite des problèmes de non 
+disponibilité des packages R dans conda. 
+
+---
+# Références
+
+- Renv documentation : https://rstudio.github.io/renv/articles/renv.html
+- Renv github : https://github.com/rstudio/renv/
+- Présentation de Kevin Ushey : https://kevinushey-2020-rstudio-conf.netlify.app/slides.html
+- http://russ-hyde.rbind.io/post/2021-02-23-renv-in-conda/
+- https://6chaoran.wordpress.com/2020/07/20/introduction-of-renv-package/
 
 
