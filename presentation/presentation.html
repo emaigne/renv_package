@@ -4,7 +4,7 @@
     <title>Package renv : présentation et retour d’expérience</title>
     <meta charset="utf-8" />
     <meta name="author" content="Elise Maigné" />
-    <meta name="date" content="2021-04-02" />
+    <meta name="date" content="2021-04-06" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 </p>
 </br>
 ### Elise Maigné
-### 2021-04-02
+### 2021-04-06
 
 ---
 
@@ -233,11 +233,11 @@ Quand on est dans un projet géré avec renv, on peut voir que le `.libPaths()` 
 
 # Fonctionnement
 
-De ce qu'on voit les packages sont installés dans un sous dossier du dossier **library**.
+Les packages sont installés dans un sous dossier de mon dossier de projet.
 
 --
 
-Et bien non !!
+**Et bien non !!**
 
 ![emplacements](images/emplacement_packages.png)
 
@@ -263,7 +263,7 @@ Une seule version par package.
 &lt;img src="images/package-cache.svg", width="300" height="150"&gt;
 &lt;p style='font-size: 10px;'&gt;&amp;copy; Kevin Ushley, &lt;a&gt;https://kevinushey-2020-rstudio-conf.netlify.app/slides.html&lt;/a&gt;&lt;/p&gt;
 
-Le cache permet d'avoir plusieurs verisons du même package.
+Le cache permet d'avoir plusieurs versions du même package.
 
 Le cache peut être désactivé pour un projet &amp;#9658; Les packages iront dans le `library` spécifique. 
 ]

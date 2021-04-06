@@ -232,11 +232,11 @@ Quand on est dans un projet géré avec renv, on peut voir que le `.libPaths()` 
 
 # Fonctionnement
 
-De ce qu'on voit les packages sont installés dans un sous dossier du dossier **library**.
+Les packages sont installés dans un sous dossier de mon dossier de projet.
 
 --
 
-Et bien non !!
+**Et bien non !!**
 
 ![emplacements](images/emplacement_packages.png)
 
@@ -262,7 +262,7 @@ Une seule version par package.
 <img src="images/package-cache.svg", width="300" height="150">
 <p style='font-size: 10px;'>&copy; Kevin Ushley, <a>https://kevinushey-2020-rstudio-conf.netlify.app/slides.html</a></p>
 
-Le cache permet d'avoir plusieurs verisons du même package.
+Le cache permet d'avoir plusieurs versions du même package.
 
 Le cache peut être désactivé pour un projet &#9658; Les packages iront dans le `library` spécifique. 
 ]
