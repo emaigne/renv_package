@@ -242,6 +242,7 @@ Les packages sont installés dans un sous dossier de mon dossier de projet.
 
 Ce sont des liens symboliques vers un dossier de cache qui contient les différentes versions des packages. 
 
+![emplacement_brio](images/brio.png)
 ---
 
 # Fonctionnement
