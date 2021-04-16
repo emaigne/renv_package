@@ -4,7 +4,7 @@
     <title>Package renv : présentation et retour d’expérience</title>
     <meta charset="utf-8" />
     <meta name="author" content="Elise Maigné" />
-    <meta name="date" content="2021-04-09" />
+    <meta name="date" content="2021-04-16" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 </p>
 </br>
 ### Elise Maigné
-### 2021-04-09
+### 2021-04-16
 
 ---
 
@@ -128,7 +128,40 @@ stocke la version de R utilisée et les versions des dépendances **dont on a be
 ]
 
 ---
+# Fonctionnement - exemple renv.lock
 
+&lt;!-- &lt;p style='font-size: 5px;'&gt; --&gt;
+
+```r
+{
+  "R": {
+    "Version": "4.0.3",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://cran.rstudio.com"
+      }
+    ]
+  },
+  "Packages": {
+    "BH": {
+      "Package": "BH",
+      "Version": "1.75.0-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e4c04affc2cac20c8fec18385cd14691"
+    },
+    "R6": {
+      "Package": "R6",
+      "Version": "2.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b203113193e70978a696b2809525649d"
+    },
+    ...
+```
+&lt;!-- &lt;/p&gt; --&gt;
+---
 # Fonctionnement
 
 `renv::init()` crée : 

@@ -129,7 +129,39 @@ stocke la version de R utilisée et les versions des dépendances **dont on a be
 ]
 
 ---
+# Fonctionnement - exemple renv.lock
 
+<!-- <p style='font-size: 5px;'> -->
+```{r, eval = FALSE}
+{
+  "R": {
+    "Version": "4.0.3",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://cran.rstudio.com"
+      }
+    ]
+  },
+  "Packages": {
+    "BH": {
+      "Package": "BH",
+      "Version": "1.75.0-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e4c04affc2cac20c8fec18385cd14691"
+    },
+    "R6": {
+      "Package": "R6",
+      "Version": "2.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b203113193e70978a696b2809525649d"
+    },
+    ...
+```
+<!-- </p> -->
+---
 # Fonctionnement
 
 `renv::init()` crée : 
