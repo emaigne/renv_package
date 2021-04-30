@@ -6,5 +6,10 @@
 Présentation pour la rencontre ingénieur statisticiens de Toulouse le 16 avril 2021 :
 http://www.thibault.laurent.free.fr/ingestat.html
 
+Présentation au R-Toulouse group le 20 mai 2021 :
+https://r-toulouse.netlify.app/evenements/2021-04-27-rencontre-du-20-mai-2021/
+
+
 Lien vers la présentation : https://elise.maigne.pages.mia.inra.fr/2021_package_renv/presentation.html
 
+**Cette présentation est susceptible d'être ~~modifiée~~ améliorée au cours du temps !** 

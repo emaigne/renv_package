@@ -517,7 +517,6 @@ Les packages étaient potentiellement déjà installés, mais compilés avec une
 .center[![ok](images/cry.png)]
 
 ---
-
 # Retour d'expérience - Utilisation avec git
 
 **renv prend tout son sens !!** On peut partager les memes versions de packages avec ses collaborateurs. 
@@ -547,7 +546,6 @@ Ils peuvent alors utiliser `renv::restore()` pour récupérer les bonnes version
 
 
 ---
-
 # Tips and tricks
 
 - **renv** c'est bien, notamment pour partager/archiver ses codes.
@@ -580,6 +578,11 @@ Tapez 'q()' pour quitter R.
 
 - renv marche même sans RStudio, et sans "projet" RStudio. C'est le .Rprofile et les fichiers de renv qui vont activer renv au niveau du dossier.
 
+
+---
+# Schéma récapitulatif
+
+.center[![schéma](images/schema.png)]
 ---
 class: center, middle
 
