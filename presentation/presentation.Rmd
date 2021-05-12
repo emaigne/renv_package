@@ -301,6 +301,11 @@ Le cache peut être désactivé pour un projet &#9658; Les packages iront dans l
 ]
 
 ---
+# Schéma récapitulatif
+
+.center[![schéma](images/schema1.png)]
+
+---
 class: center, middle
 
 # Comment l'utiliser ?
@@ -582,7 +587,7 @@ Tapez 'q()' pour quitter R.
 ---
 # Schéma récapitulatif
 
-.center[![schéma](images/schema.png)]
+.center[![schéma](images/schema2.png)]
 ---
 class: center, middle
 
