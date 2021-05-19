@@ -4,7 +4,7 @@
     <title>Package renv : présentation et retour d’expérience</title>
     <meta charset="utf-8" />
     <meta name="author" content="Elise Maigné" />
-    <meta name="date" content="2021-05-12" />
+    <meta name="date" content="2021-05-19" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 </p>
 </br>
 ### Elise Maigné
-### 2021-05-12
+### 2021-05-19
 
 ---
 
@@ -27,6 +27,12 @@ class: center, middle, inverse, title-slide
 
 
 
+
+&lt;style type="text/css"&gt;
+.tiny .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+&lt;/style&gt;
 
 class: center, middle
 
@@ -69,7 +75,6 @@ Dans un dossier spécifique (la racine d'un projet) :
 
 ```r
 install.packages("renv")
-library(renv)
 renv::init()
 ```
 
@@ -130,7 +135,7 @@ stocke la version de R utilisée et les versions des dépendances **dont on a be
 ---
 # Fonctionnement - exemple renv.lock
 
-&lt;!-- &lt;p style='font-size: 5px;'&gt; --&gt;
+.tiny[
 
 ```r
 {
@@ -160,7 +165,8 @@ stocke la version de R utilisée et les versions des dépendances **dont on a be
     },
     ...
 ```
-&lt;!-- &lt;/p&gt; --&gt;
+]
+
 ---
 # Fonctionnement
 
@@ -318,9 +324,9 @@ class: center, middle
 
 .pull-left[
 - ####**`renv::init()`**
-- `renv::snapshot()`
 - `renv::status()`
 - `renv::dependencies()`
+- `renv::snapshot()`
 - `renv::restore()`
 - `renv::install()`
 ]
@@ -336,9 +342,69 @@ Pour initialiser l'utilisation de renv dans le projet.
 
 .pull-left[
 - `renv::init()`
-- ####**`renv::snapshot()`**
+- ####**`renv::status()`**
+- `renv::dependencies()`
+- `renv::snapshot()`
+- `renv::restore()`
+- `renv::install()`
+]
+
+.pull-right[
+Pour savoir où on en est par rapport au fichier renv.lock. 
+
+Est-ce qu'il y a des packages non présents dans renv.lock ? 
+
+Des packages dans renv.lock non utilisés dans le code R ? 
+]
+
+Exemple : 
+
+```r
+renv::status()
+The following package(s) are installed but not recorded in the lockfile:
+  Rcpp             [1.0.6]
+  whisker          [0.4]
+  knitr            [1.31]
+  
+Use `renv::snapshot()` to add these packages to your lockfile.
+```
+
+---
+
+# Commandes à connaitre
+
+.pull-left[
+- `renv::init()`
+- `renv::status()`
+- ####**`renv::dependencies()`**
+- `renv::snapshot()`
+- `renv::restore()`
+- `renv::install()`
+]
+
+.pull-right[
+&lt;/br&gt;&lt;/br&gt;
+Quels sont les packages utilisés dans le code ? 
+
+Uniquement packages appelés dans les scripts R (.R ou .Rmd ou .Rnw ou DESCRIPTION) d'une des façons suivantes :
+
+```r
+library(package)
+require(package)
+requireNamespace("package")
+package::method()
+```
+]
+
+---
+
+# Commandes à connaitre
+
+.pull-left[
+- `renv::init()`
 - `renv::status()`
 - `renv::dependencies()`
+- ####**`renv::snapshot()`**
 - `renv::restore()`
 - `renv::install()`
 ]
@@ -370,69 +436,9 @@ Do you want to proceed? [y/N]:
 
 .pull-left[
 - `renv::init()`
-- `renv::snapshot()`
-- ####**`renv::status()`**
-- `renv::dependencies()`
-- `renv::restore()`
-- `renv::install()`
-]
-
-.pull-right[
-Pour savoir où on en est par rapport au fichier renv.lock. 
-
-Est-ce qu'il y a des packages non présents dans renv.lock ? 
-
-Des packages dans renv.lock non utilisés dans le code R ? 
-]
-
-Exemple : 
-
-```r
-renv::status()
-The following package(s) are installed but not recorded in the lockfile:
-  Rcpp             [1.0.6]
-  whisker          [0.4]
-  knitr            [1.31]
-  
-Use `renv::snapshot()` to add these packages to your lockfile.
-```
-
----
-
-# Commandes à connaitre
-
-.pull-left[
-- `renv::init()`
-- `renv::snapshot()`
-- `renv::status()`
-- ####**`renv::dependencies()`**
-- `renv::restore()`
-- `renv::install()`
-]
-
-.pull-right[
-&lt;/br&gt;&lt;/br&gt;
-Quels sont les packages utilisés dans le code ? 
-
-Uniquement packages appelés dans les scripts R (.R ou .Rmd ou .Rnw ou DESCRIPTION) d'une des façons suivantes :
-
-```r
-library(package)
-require(package)
-requireNamespace("package")
-package::method()
-```
-]
-
----
-
-# Commandes à connaitre
-
-.pull-left[
-- `renv::init()`
-- `renv::snapshot()`
 - `renv::status()`
 - `renv::dependencies()`
+- `renv::snapshot()`
 - ####**`renv::restore()`**
 - `renv::install()`
 ]
@@ -450,9 +456,9 @@ Pour revenir à l'état du renv.lock. i.e. désinstalle les packages en trop, r�
 
 .pull-left[
 - `renv::init()`
-- `renv::snapshot()`
 - `renv::status()`
 - `renv::dependencies()`
+- `renv::snapshot()`
 - `renv::restore()`
 - ####**`renv::install()`**
 ]
@@ -479,9 +485,9 @@ renv::install("bioc::Biobase") # (note: requires the BiocManager package)
 
 .pull-left[
 - `renv::init()`
-- `renv::snapshot()`
 - `renv::status()`
 - `renv::dependencies()`
+- `renv::snapshot()`
 - `renv::restore()`
 - `renv::install()`
 ]
@@ -556,7 +562,7 @@ Ils peuvent alors utiliser `renv::restore()` pour récupérer les bonnes version
 
 
 ---
-# Tips and tricks
+# Retour d'expérience
 
 - **renv** c'est bien, notamment pour partager/archiver ses codes.
 
