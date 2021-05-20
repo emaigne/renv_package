@@ -14,7 +14,6 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 ---
-
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 ```
@@ -30,16 +29,11 @@ style_mono_light(
 )
 ```
 
-```{css, echo = FALSE}
-.tiny .remark-code { /*Change made here*/
-  font-size: 70% !important;
-}
-```
-
 class: center, middle
 
 # renv c'est quoi ? 
 <img src="https://rstudio.github.io/renv/reference/figures/logo.svg", width="300" height="300">
+
 ---
 ### Package renv
 
@@ -114,6 +108,12 @@ active renv au démarrage du projet/lancement de R depuis ce dossier
 ---
 
 # Fonctionnement
+
+```{css, echo = FALSE}
+.tiny .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+```
 
 `renv::init()` crée : 
 
