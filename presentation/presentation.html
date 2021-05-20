@@ -540,14 +540,6 @@ Les packages étaient potentiellement déjà installés, mais compilés avec une
 
 --
 
-#### Partage à minima :
-
-- le fichier renv.lock
-
-Une autre personne peut, chez elle faire un `renv::init()` pour installer les packages correspondants. 
-
---
-
 ####  Pour partager en cours de développement (**comportement par défaut**) :
 
 - le fichier renv.lock
@@ -560,6 +552,15 @@ Une autre personne peut, chez elle faire un `renv::init()` pour installer les pa
 A l'aide du .Rprofile, renv s'active tout seul chez les autres membres du projet. 
 
 Ils peuvent alors utiliser `renv::restore()` pour récupérer les bonnes versions des packages.
+
+--
+
+#### Partage à minima :
+
+- le fichier renv.lock
+
+Une autre personne peut, chez elle faire un `renv::init()` pour installer les packages correspondants. 
+
 
 
 ---
