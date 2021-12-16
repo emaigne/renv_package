@@ -10,6 +10,6 @@ Présentation au R-Toulouse group le 20 mai 2021 :
 https://r-toulouse.netlify.app/evenements/2021-04-27-rencontre-du-20-mai-2021/
 
 
-Lien vers la présentation : https://elise.maigne.pages.mia.inra.fr/2021_package_renv/presentation.html
+Lien vers la présentation : https://elisemaigne.pages.mia.inra.fr/2021_package_renv/presentation.html
 
 **Cette présentation est susceptible d'être ~~modifiée~~ améliorée au cours du temps !** 
